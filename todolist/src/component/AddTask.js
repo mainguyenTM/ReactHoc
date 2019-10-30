@@ -22,7 +22,7 @@ class AddTask extends Component {
         })
     }
     render() {
-        if (this.state.showTaskList == true) {
+        if (this.state.showTaskList === true) {
             return (
                 <TaskList />
             )
