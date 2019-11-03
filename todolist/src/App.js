@@ -1,14 +1,150 @@
-import React from 'react';
+//importing modules
+import React, {Component} from 'react';
+import axios from 'axios'
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import uuid from 'react-uuid';
+
 import './App.css';
-import TaskList from './component/TaskList';
+
+//Component
+import Header from './component/Header';
+import AddToDo from './component/AddToDo';
+import ToDoList from './component/ToDoList';
+import About from './component/pages/About';
 
 
-function App() {
-  return (
-    <div className="App">
-      <TaskList />
-    </div>
-  );
+
+/* class App extends Component {
+  state = {
+    toDoList: []
+  }
+
+  componentDidMount() {
+    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
+          .then(res => this.setState({toDoList: res.data}));
+  }
+
+  //Toggle Complete
+  markComplete = (id) => {
+    this.setState({
+      toDoList: this.state.toDoList.map(toDoItem => {
+        if(toDoItem.id === id) {
+          toDoItem.completed = !toDoItem.completed;
+        }
+        return toDoItem;
+      })
+    });
+  }
+
+  addToDo = (title) => {
+    const newToDo = {
+      userId: 1,
+      //id: uuid(),
+      title: title,
+      completed: false
+    }
+
+    axios.post('https://jsonplaceholder.typicode.com/todos/', newToDo).then(res => {
+      res.data.id = uuid();
+      this.setState({
+      toDoList: [...this.state.toDoList, res.data]
+      })
+    }
+    )
+  }
+
+  deleteToDo = (id) => {
+    axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+      .then(res => this.setState({ toDoList: [...this.state.toDoList.filter(todo => todo.id !== id)]}));
+  }
+
+  render() {
+    return (
+      <Router>
+        <div className="App">
+          <div className="container">
+            <Header />
+            <div>
+              <Route exact path="/" render={props => (
+                <React.Fragment>
+                  <div className="mv-20"><AddToDo addToDo={this.addToDo} /></div>
+                  <ToDoList toDoList={this.state.toDoList} deleteToDo={this.deleteToDo} ></ToDoList>
+                </React.Fragment>
+              )}></Route>
+            </div>
+          </div>
+        </div>
+      </Router>
+    )
+  }
+}
+
+export default App */
+class App extends Component {
+  state = {
+    toDoList: []
+  }
+
+  componentDidMount() {
+    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
+          .then(res => this.setState({toDoList: res.data}));
+  }
+
+  //Toggle Complete
+  markComplete = (id) => {
+    this.setState({
+      toDoList: this.state.toDoList.map(toDoItem => {
+        if(toDoItem.id === id) {
+          toDoItem.completed = !toDoItem.completed;
+        }
+        return toDoItem;
+      })
+    });
+  }
+
+  addToDo = (title) => {
+    const newToDo = {
+      userId: 1,
+      //id: uuid(),
+      title: title,
+      completed: false
+    }
+
+    axios.post('https://jsonplaceholder.typicode.com/todos/', newToDo).then(res => {
+      res.data.id = uuid();
+      this.setState({
+      toDoList: [...this.state.toDoList, res.data]
+      })
+    }
+    )
+  }
+
+  deleteToDo = (id) => {
+    axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+      .then(res => this.setState({ toDoList: [...this.state.toDoList.filter(todo => todo.id !== id)]}));
+  }
+
+  render() {
+    return (
+      <Router>
+        <div className="App">
+          <div className="container">
+            <Header />
+            <div>
+              <Route exact path="/" render={props => (
+                <div>
+                  <div className="mv-20"><AddToDo addToDo={this.addToDo} /></div>
+                  <ToDoList toDoList={this.state.toDoList} deleteToDo={this.deleteToDo} ></ToDoList>
+                </div>
+              )}></Route>
+
+              <Route path="/about" component={About} />
+            </div>
+          </div>
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;

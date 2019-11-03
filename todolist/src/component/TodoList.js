@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import ToDoItem from './ToDoItem';
+//import PropTypes from 'prop-types';
 
-class TodoList extends Component {
+class ToDoList extends Component {
     render() {
-        return <tr>
-            <td>{this.props.name}</td>
-        </tr>
+        return this.props.toDoList.map((item) => (
+            <ToDoItem key={item.id} todo={item} deleteToDo={this.props.deleteToDo} />
+        ))
     }
 }
 
-export default TodoList;
+export default ToDoList;
