@@ -15,7 +15,8 @@ class ToDoItem extends Component {
         return (
             <div style={this.getStyle()}>
                 <p>
-                    {title}
+                    <input type="checkbox" name="checkbox" />
+                    <span style={{'paddingLeft': '10px', 'display': 'inline-block'}}>{title}</span>
                     <button onClick={this.props.deleteToDo.bind(this, id)} style={{ float: 'right', border: 'none' }} >
                         <i className="fa fa-trash" aria-hidden="true"></i>
                     </button>

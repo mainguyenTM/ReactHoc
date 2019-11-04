@@ -11,6 +11,7 @@ import Header from './component/Header';
 import AddToDo from './component/AddToDo';
 import ToDoList from './component/ToDoList';
 import About from './component/pages/About';
+import FilterToDo from './component/FilterToDo';
 
 
 
@@ -20,6 +21,10 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.resetData();
+  }
+
+  resetData(){
     axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
           .then(res => this.setState({toDoList: res.data}));
   }
@@ -47,10 +52,23 @@ class App extends Component {
     axios.post('https://jsonplaceholder.typicode.com/todos/', newToDo).then(res => {
       res.data.id = uuid();
       this.setState({
-      toDoList: [...this.state.toDoList, res.data]
+        toDoList: [...this.state.toDoList, res.data]
       })
     }
     )
+  }
+  
+  filterToDo = (title) => {
+    if(title){
+        this.setState({
+            toDoList: this.state.toDoList.filter(function(item){
+                return item.title.toLowerCase().search(title) !== -1
+            })
+          })
+    }else{
+        this.resetData();
+    }
+    
   }
 
   deleteToDo = (id) => {
@@ -69,6 +87,9 @@ class App extends Component {
             <Route exact path="/" render={props => (
               <div>
                 <AddToDo addToDo={this.addToDo} />
+                <div className="mv-20">
+                    <FilterToDo filterToDo={this.filterToDo} />
+                </div>
                 <ToDoList toDoList={this.state.toDoList} deleteToDo={this.deleteToDo}/>
               </div>
             )} />

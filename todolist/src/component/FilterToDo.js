@@ -1,33 +1,36 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, {Component} from 'react';
 
-class AddTodo extends Component {
+class FilterToDo extends Component{
     state = {
-        title: ''
+        text: '',
+        label: 'Filter'
+    }
+
+    onChange = (e) => {
+        this.setState({
+            title:  e.target.value
+        })
     }
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.addToDo(this.state.title);
-        this.setState({ title: '' });
+        this.props.filterToDo(this.state.title);
     }
-
-    onChange = (e) => this.setState({ title: e.target.value });
-
-    render() {
+    
+    render(){
         return (
             <form onSubmit={this.onSubmit} style={{display: 'flex'}}>
                 <input 
                     type="text" 
                     name="title"
                     style={{flex: '10', padding: '5px'}}
-                    placeholder="Add Todo..." 
+                    placeholder="Filter Todo..." 
                     value={this.state.title}
                     onChange={this.onChange}
                 />
                 <input 
                     type="submit"
-                    value="Submit"
+                    value={this.state.label}
                     className="btn"
                     style= {{flex: '1'}}
                 />
@@ -36,9 +39,4 @@ class AddTodo extends Component {
     }
 }
 
-// PropTypes
-/* AddTodo.PropTypes = {
-    addTodo: PropTypes.func.isRequired
-} */
-
-export default AddTodo;
+export default FilterToDo;
