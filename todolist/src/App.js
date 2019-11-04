@@ -90,6 +90,9 @@ class App extends Component {
                 <div className="mv-20">
                     <FilterToDo filterToDo={this.filterToDo} />
                 </div>
+                <div className="text-center mv-20">
+                    <i>Action: comming soon</i>
+                </div>
                 <ToDoList toDoList={this.state.toDoList} deleteToDo={this.deleteToDo}/>
               </div>
             )} />
