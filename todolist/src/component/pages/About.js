@@ -7,7 +7,8 @@ const About = () => {
             <ol>
                 <li>Create a task</li>
                 <li>Delete a task</li>
-                <li>Not finish: filter, update, set completed task</li>
+                <li>Search a task</li>
+                <li>Not finish: set status of task, update</li>
             </ol>
         </div>
     )
