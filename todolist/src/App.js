@@ -1,3 +1,4 @@
+
 //importing modules
 import React, {Component} from 'react';
 import axios from 'axios'
@@ -9,7 +10,7 @@ import './App.css';
 //Component
 import Header from './component/Header';
 import AddToDo from './component/AddToDo';
-import ToDoList from './component/ToDoList';
+import ToDoList from './component/TodoList';
 import About from './component/pages/About';
 import FilterToDo from './component/FilterToDo';
 
@@ -103,6 +104,17 @@ class App extends Component {
       </Router>
     )
   }
-}
+} 
 
 export default App
+
+
+
+/* import {Component} from 'react';
+export default class App extends Component{
+  render(){
+    return(
+      'asfsf'
+    )
+  }
+} */
